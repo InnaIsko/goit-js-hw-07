@@ -44,7 +44,9 @@ function createModal(event) {
     if (event.key === "Escape") {
       instance.close();
     }
-    document.removeEventListener("keydown", onEscClose);
+    if (!visible && event.key === "Escape") {
+      document.removeEventListener("keydown", onEscClose);
+    }
   }
   document.addEventListener("keydown", onEscClose);
 }
