@@ -35,18 +35,21 @@ function imgClick(event) {
 
 function createModal(event) {
   const imgUrl = event.target.dataset.source;
-  const visible = basicLightbox.visible();
-  const instance = basicLightbox.create(`
-    <img src="${imgUrl}" width="800" height="600">
-`);
+  const instance = basicLightbox.create(
+    `
+<img src="${imgUrl}" width="800" height="600">
+`,
+    {
+      onClose: () => window.removeEventListener("keydown", onEscClose),
+    }
+  );
   instance.show();
   function onEscClose(event) {
     if (event.key === "Escape") {
       instance.close();
-    }
-    if (!visible && event.key === "Escape") {
-      document.removeEventListener("keydown", onEscClose);
+      console.log("111");
     }
   }
-  document.addEventListener("keydown", onEscClose);
+
+  window.addEventListener("keydown", onEscClose);
 }
