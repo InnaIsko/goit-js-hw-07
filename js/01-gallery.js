@@ -40,9 +40,11 @@ function createModal(event) {
     <img src="${imgUrl}" width="800" height="600">
 `);
   instance.show();
-  document.addEventListener("keydown", (event) => {
+  function onEscClose(event) {
     if (event.key === "Escape") {
       instance.close();
     }
-  });
+    document.removeEventListener("keydown", onEscClose);
+  }
+  document.addEventListener("keydown", onEscClose);
 }
